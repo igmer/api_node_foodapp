@@ -31,6 +31,8 @@ const Clientes = db.define('fac_Clientes', {
     ModificadoPor: Sequelize.STRING,// [varchar](20) NOT NULL,
     FechaHoraModificacion: Sequelize.STRING,// [datetime] NULL,
     eliminado: Sequelize.INTEGER,// [int] NULL,
+    latitud: Sequelize.DOUBLE,// [int] NULL,
+    longitud: Sequelize.DOUBLE,// [int] NULL,
 }, {
     tableName: 'fac_Clientes',
     timestamps: false
