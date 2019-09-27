@@ -15,7 +15,7 @@ db.authenticate()
     .catch( err => {
         console.log(err)
     });
-var port = process.env.PORT || 8080;
+var port = process.env.PORT || 8081;
 // Send message for default URL
 app.use('/api/foodapp/usuario',require('./controller/UsuarioController'));
 app.use('/api/foodapp/cliente',require('./controller/ClienteController'));
