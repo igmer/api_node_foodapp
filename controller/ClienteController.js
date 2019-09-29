@@ -84,7 +84,7 @@ router.put('/createcliente', function(req, res)  {
 router.get('/clientegetall', (req, res) =>
     db.query("SELECT f.* ,d.Nombre as departamento, m.Nombre as municipio from fac_clientes f " +
         "INNER JOIN adm_Departamentos d on f.IdDepartamento = d.IdDepartamento "+
-        "INNER JOIN adm_Municipios m on f.IdMunicipio = m.IdMunicipio")
+        "INNER JOIN adm_Municipios m on f.IdMunicipio = m.IdMunicipio",{ type: db.QueryTypes.SELECT })
         .then(cliente => {
             console.log(cliente);
             res.json({
@@ -95,22 +95,50 @@ router.get('/clientegetall', (req, res) =>
         .catch(err => console.log(err))
 
 );
-router.get('/setting', (req, res) => {
-        const departamentos = Departamento.findAll();
-        const municipios = Municipio.findAll();
-        const ruta = Ruta.findAll();
-        Promise.all([departamentos, municipios,ruta])
+router.get('/productosall', (req, res) =>
+    db.query("SELECT p.*,pre.precio AS precio, c.nombre AS categoria  FROM fac_Productos p  INNER JOIN fac_ProductosPrecios pre ON pre.IdProducto=p.id INNER JOIN fac_CategoriasProductos c ON c.Id=p.idCategoria",{ type: db.QueryTypes.SELECT })
+        .then(productos => {
+            console.log(productos);
+            res.json({
+                statusCode:200,
+                data:productos
+            })
+        })
+        .catch(err => console.log(err))
+
+);
+router.get('/catalogo_pedido', (req, res) => {
+        const clientes = db.query("SELECT * FROM fac_Clientes",{ type: db.QueryTypes.SELECT })
+        const productos=  db.query("SELECT p.*,pre.precio AS precio, c.nombre AS categoria "+
+        " FROM fac_Productos p  INNER JOIN fac_ProductosPrecios pre ON pre.IdProducto=p.id INNER JOIN fac_CategoriasProductos c ON c.Id=p.idCategoria",{ type: db.QueryTypes.SELECT })       
+        Promise.all([clientes, productos])
             .then(response => {
                 res.json({
-                    dataDepto: response[0],
-                    dataMun: response[1],
-                    dataRuta: response[2]
+                    dataClientes: response[0],
+                    dataProductos: response[1],
                 })
             }).catch(err => {
             console.log(err);
         });
     }
 );
+router.get('/setting', (req, res) => {
+    const departamentos = Departamento.findAll();
+    const municipios = Municipio.findAll();
+    const ruta = Ruta.findAll();
+    Promise.all([departamentos, municipios,ruta])
+        .then(response => {
+            res.json({
+                dataDepto: response[0],
+                dataMun: response[1],
+                dataRuta: response[2]
+            })
+        }).catch(err => {
+        console.log(err);
+    });
+}
+);
+
 
 
 module.exports = router;
