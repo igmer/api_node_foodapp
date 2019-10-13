@@ -19,6 +19,8 @@ var port = process.env.PORT || 8081;
 // Send message for default URL
 app.use('/api/foodapp/usuario',require('./controller/UsuarioController'));
 app.use('/api/foodapp/cliente',require('./controller/ClienteController'));
+app.use('/api/foodapp/pedido',require('./controller/PedidoController'));
+
 app.get('/', (req, res) => res.send('Hello World with Express'));
 // Launch app to listen to specified port
 app.listen(port, function () {
