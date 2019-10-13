@@ -44,7 +44,8 @@ router.post('/createpedido', function(req, res)  {
           as: 'detalles'
         }]
       }).then(pedido => res.json({
-        data:pedido
+        data:"exito",
+        status:200
 
     }))
         .catch(err => res.json({
