@@ -108,9 +108,11 @@ router.get('/productosall', (req, res) =>
 
 );
 router.get('/catalogo_pedido', (req, res) => {
+    let idPrecio = req.query.idPrecio;
         const clientes = db.query("SELECT * FROM fac_Clientes",{ type: db.QueryTypes.SELECT })
         const productos=  db.query("SELECT p.*,pre.precio AS precio, c.nombre AS categoria "+
-        " FROM fac_Productos p  INNER JOIN fac_ProductosPrecios pre ON pre.IdProducto=p.id INNER JOIN fac_CategoriasProductos c ON c.Id=p.idCategoria",{ type: db.QueryTypes.SELECT })       
+        " FROM fac_Productos p  INNER JOIN fac_ProductosPrecios pre ON pre.IdProducto=p.id"+
+        " INNER JOIN fac_CategoriasProductos c ON c.Id=p.idCategoria WHERE pre.IdLista="+idPrecio,{ type: db.QueryTypes.SELECT })       
         Promise.all([clientes, productos])
             .then(response => {
                 res.json({
