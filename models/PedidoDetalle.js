@@ -2,7 +2,7 @@ let Sequelize = require('sequelize');
 const db = require('../config/database');
 const Pedido = require('./Pedido');
 const PedidoDetalle = db.define('fac_PedidosDetalle', {
-    Id: { type: Sequelize.INTEGER, primaryKey: true,autoIncrement: false },
+    IdDetalle: { type: Sequelize.INTEGER, primaryKey: true,autoIncrement: false },
     IdComprobante:Sequelize.INTEGER,
      IdProducto:Sequelize.INTEGER,
      IdPrecio:Sequelize.INTEGER,
