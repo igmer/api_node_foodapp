@@ -19,6 +19,13 @@ router.post('/createpedido', function (req, res) {
         Notas, CreadoPor, FechaHoraCreacion, ModificadoPor, FechaHoraModificacion, Confirmado,
         ConfirmadoPor, FechaHoraConfirmacio, totalPedido } = req.body
     let detalles = req.body['pedidoDetalleList']
+    let {IdCliente,
+        IdVendedor,
+        Latitud,
+        Longitud,
+        Pedido,
+        Comentario,
+        FechaHoraCreacion}= req.body['checkin']
 
     Pedido.create({
         Fecha, IdCliente, Nombre, Nrc, Nit, Giro, Direccion, Telefono,
@@ -114,5 +121,21 @@ router.post('/createcheckin', function (req, res) {
             data: err
         }))
 });
+    router.get('/getrutadiaria', (req, res) =>{
+        let idVendedor =req.query.idVendedor;
+        let fecha =req.query.fecha;
+        db.query(`fac_RecorridoRutaVendedor ${idVendedor}, '${fecha}'`,{ type: db.QueryTypes.SELECT })
+    .then(productos => {
+            console.log(productos);
+            res.json({
+                statusCode:200,
+                data:productos
+            })
+        })
+        .catch(err => console.log(err))
+
+    });
+    
+
 
 module.exports = router;
