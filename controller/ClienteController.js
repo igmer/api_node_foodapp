@@ -84,7 +84,7 @@ router.put('/createcliente', function(req, res)  {
 router.get('/clientegetall', (req, res) =>
     db.query("SELECT f.* ,d.Nombre as departamento, m.Nombre as municipio from fac_clientes f " +
         "INNER JOIN adm_Departamentos d on f.IdDepartamento = d.IdDepartamento "+
-        "INNER JOIN adm_Municipios m on f.IdMunicipio = m.IdMunicipio",{ type: db.QueryTypes.SELECT })
+        "INNER JOIN adm_Municipios m on f.IdMunicipio = m.IdMunicipio ORDER BY f.Nombre",{ type: db.QueryTypes.SELECT })
         .then(cliente => {
             console.log(cliente);
             res.json({
