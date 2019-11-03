@@ -98,7 +98,7 @@ router.get('/clientegetall', function(req, res) {
 
     );
     router.get('/get_cliente_ruta',function (req, res) {
-        let now = new Date().toISOString().replace('T', ' ').substr(0, 19) 
+        let now = new Date().toISOString().replace('T', ' ').substr(0, 10) 
         let idVendedor =req.query.idVendedor;
         db.query(`fac_RecorridoRutaVendedor ${idVendedor}, '${now}'`,{ type: db.QueryTypes.SELECT })
     .then(productos => {
