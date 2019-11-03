@@ -9,7 +9,8 @@ const Usuario = db.define('usuarios', {
     Idsucursal:Sequelize.STRING,
     deleted:Sequelize.STRING,
     createdAt:Sequelize.STRING,
-    updatedAt:Sequelize.STRING
+    updatedAt:Sequelize.STRING,
+    IdRol:Sequelize.INTEGER
 },{
     tableName: 'usuarios',
     timestamps:false
