@@ -7,7 +7,6 @@ const PedidoDetalle = db.define('fac_PedidosDetalle', {
      IdProducto:Sequelize.INTEGER,
      IdPrecio:Sequelize.INTEGER,
      Cantidad:Sequelize.INTEGER,
-     Descripcion:Sequelize.STRING,
      PrecioVenta:Sequelize.DOUBLE,
       PorcDescuento:Sequelize.DOUBLE,
      ValorDescuento:Sequelize.DOUBLE,

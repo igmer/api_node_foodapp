@@ -14,22 +14,13 @@ router.use(express.urlencoded({ extended: true }));
 
 router.post('/createpedido', function (req, res) {
     let {
-        Fecha, IdCliente, Nombre, Nrc, Nit, Giro, Direccion,
-        Telefono, IdMunicipio, IdDepartamento, IdTipoComprobante, DiasCredito, IdVendedor,
+        Fecha, IdCliente,  IdVendedor,
         Notas, CreadoPor, FechaHoraCreacion, ModificadoPor, FechaHoraModificacion, Confirmado,
         ConfirmadoPor, FechaHoraConfirmacio, totalPedido } = req.body
     let detalles = req.body['pedidoDetalleList']
-    let {IdCliente,
-        IdVendedor,
-        Latitud,
-        Longitud,
-        Pedido,
-        Comentario,
-        FechaHoraCreacion}= req.body['checkin']
-
+    
     Pedido.create({
-        Fecha, IdCliente, Nombre, Nrc, Nit, Giro, Direccion, Telefono,
-        IdMunicipio, IdDepartamento, IdTipoComprobante, DiasCredito,
+        Fecha, IdCliente,
         IdVendedor, Notas, CreadoPor, FechaHoraCreacion, ModificadoPor,
         FechaHoraModificacion, Confirmado, ConfirmadoPor, FechaHoraConfirmacio, totalPedido, detalles
     }, {
@@ -135,6 +126,7 @@ router.post('/createcheckin', function (req, res) {
         .catch(err => console.log(err))
 
     });
+    
     
 
 
