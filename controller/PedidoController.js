@@ -91,14 +91,14 @@ router.post('/createdetalle', function (req, res) {
         }))
 });
 router.post('/createcheckin', function (req, res) {
+    let FechaHoraCreacion = new Date().toISOString().replace('T', ' ').substr(0, 19) 
     let {
         IdCliente,
         IdVendedor,
         Latitud,
         Longitud,
         Pedido,
-        Comentario,
-        FechaHoraCreacion
+        Comentario
     } = req.body;
        
     console.log(IdCliente);

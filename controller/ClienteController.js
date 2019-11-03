@@ -81,7 +81,8 @@ router.put('/createcliente', function(req, res)  {
             data: err
         }))
 });
-router.get('/clientegetall', (req, res) =>
+router.get('/clientegetall', function(req, res) {
+  
     db.query("SELECT f.* ,d.Nombre as departamento, m.Nombre as municipio from fac_clientes f " +
         "INNER JOIN adm_Departamentos d on f.IdDepartamento = d.IdDepartamento "+
         "INNER JOIN adm_Municipios m on f.IdMunicipio = m.IdMunicipio ORDER BY f.Nombre",{ type: db.QueryTypes.SELECT })
@@ -93,8 +94,24 @@ router.get('/clientegetall', (req, res) =>
             })
         })
         .catch(err => console.log(err))
+    }
 
-);
+    );
+    router.get('/get_cliente_ruta',function (req, res) {
+        let now = new Date().toISOString().replace('T', ' ').substr(0, 19) 
+        let idVendedor =req.query.idVendedor;
+        db.query(`fac_RecorridoRutaVendedor ${idVendedor}, '${now}'`,{ type: db.QueryTypes.SELECT })
+    .then(productos => {
+            console.log(productos);
+            res.json({
+                statusCode:200,
+                data:productos
+            })
+        })
+        .catch(err => console.log(err))
+        }
+
+    );
 router.get('/productosall', (req, res) =>
     db.query("SELECT p.*,pre.precio AS precio, c.nombre AS categoria  FROM fac_Productos p  INNER JOIN fac_ProductosPrecios pre ON pre.IdProducto=p.id INNER JOIN fac_CategoriasProductos c ON c.Id=p.idCategoria",{ type: db.QueryTypes.SELECT })
         .then(productos => {
