@@ -105,7 +105,8 @@ router.get('/clientegetall', function(req, res) {
             console.log(productos);
             res.json({
                 statusCode:200,
-                data:productos
+                data:productos,
+                fecha:now
             })
         })
         .catch(err => console.log(err))
