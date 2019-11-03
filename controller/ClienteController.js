@@ -158,6 +158,25 @@ router.get('/setting', (req, res) => {
     });
 }
 );
+router.get('/getlistaprecios', (req, res) =>
+
+db.query("select * from fac_ListaPrecios",{ type: db.QueryTypes.SELECT })
+.then(lista => {
+    console.log(lista);
+    res.json({
+        statusCode:200,
+        data:lista    })
+})
+.catch(err => console.log(err))
+        .then(cliente => {
+            console.log(cliente);
+            res.json({
+                statusCode:200,
+                data:cliente
+            })
+        })
+        .catch(err => console.log(err))
+);
 
 
 
