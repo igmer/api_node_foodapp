@@ -113,8 +113,11 @@ router.get('/clientegetall', function(req, res) {
         }
 
     );
-router.get('/productosall', (req, res) =>
-    db.query("SELECT p.*,pre.precio AS precio, c.nombre AS categoria  FROM fac_Productos p  INNER JOIN fac_ProductosPrecios pre ON pre.IdProducto=p.id INNER JOIN fac_CategoriasProductos c ON c.Id=p.idCategoria",{ type: db.QueryTypes.SELECT })
+router.get('/productosall', function(req, res){
+    let id= req.query.idLista;
+    db.query(`SELECT p.*,pre.precio AS precio, c.nombre AS categoria "+
+     "FROM fac_Productos p  INNER JOIN fac_ProductosPrecios pre ON pre.IdProducto=p.id "+
+     "INNER JOIN fac_CategoriasProductos c ON c.Id=p.idCategoria WHERE pre.IdLista= ${id}`,{ type: db.QueryTypes.SELECT })
         .then(productos => {
             console.log(productos);
             res.json({
@@ -123,6 +126,7 @@ router.get('/productosall', (req, res) =>
             })
         })
         .catch(err => console.log(err))
+    }
 
 );
 router.get('/catalogo_pedido', (req, res) => {
