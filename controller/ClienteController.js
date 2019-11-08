@@ -5,6 +5,7 @@ const Cliente = require('../models/ClienteModel');
 const Municipio = require('../models/Municipio');
 const Departamento = require('../models/Departamento');
 const Ruta = require('../models/Ruta');
+let dateFormat = require('dateformat');
 router.use(express.json());
 router.use(express.urlencoded({extended:true}));
 
@@ -98,15 +99,19 @@ router.get('/clientegetall', function(req, res) {
 
     );
     router.get('/get_cliente_ruta',function (req, res) {
-        let now = new Date().toISOString().replace('T', ' ').substr(0, 10) 
+        var now = new Date();
+        let fecha = dateFormat(now,"yyyyddmm")
+
+
+        console.log(fecha)
         let idVendedor =req.query.idVendedor;
-        db.query(`fac_ClienteRecorridoRutaVendedor ${idVendedor}, '${now}'`,{ type: db.QueryTypes.SELECT })
+        db.query(`fac_ClienteRecorridoRutaVendedor ${idVendedor}, '${fecha}'`,{ type: db.QueryTypes.SELECT })
     .then(productos => {
             console.log(productos);
             res.json({
                 statusCode:200,
                 data:productos,
-                fecha:now
+                fecha:fecha
             })
         })
         .catch(err => console.log(err))
