@@ -100,9 +100,7 @@ router.get('/clientegetall', function(req, res) {
     );
     router.get('/get_cliente_ruta',function (req, res) {
         var now = new Date();
-        let fecha = dateFormat(now,"yyyyddmm")
-
-
+        let fecha = dateFormat(now,"yyyymmdd")
         console.log(fecha)
         let idVendedor =req.query.idVendedor;
         db.query(`fac_ClienteRecorridoRutaVendedor ${idVendedor}, '${fecha}'`,{ type: db.QueryTypes.SELECT })
