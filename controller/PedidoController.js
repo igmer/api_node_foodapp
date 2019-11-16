@@ -14,7 +14,7 @@ router.use(express.urlencoded({ extended: true }));
 
 router.post('/createpedido', function (req, res) {
     let {
-        Fecha, IdCliente,  IdVendedor,
+        Fecha, IdCliente,  IdVendedor,Numero,
         Notas, CreadoPor, FechaHoraCreacion, ModificadoPor, FechaHoraModificacion, Confirmado,
         ConfirmadoPor, FechaHoraConfirmacio, totalPedido } = req.body
     let detalles = req.body['pedidoDetalleList']

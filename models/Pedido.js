@@ -7,6 +7,7 @@ const Pedido = db.define('fac_pedidos', {
      Fecha:Sequelize.STRING,
      IdCliente:Sequelize.INTEGER,
      IdVendedor:Sequelize.INTEGER,
+     Numero:Sequelize.STRING,
      Notas:Sequelize.STRING,
      CreadoPor:Sequelize.STRING,
      FechaHoraCreacion:Sequelize.STRING,
