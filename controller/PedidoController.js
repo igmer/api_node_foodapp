@@ -82,17 +82,17 @@ router.post('/createdetalle', function (req, res) {
         }))
 });
 router.post('/createcheckin', function (req, res) {
-    let FechaHoraCreacion = new Date().toISOString().replace('T', ' ').substr(0, 19) 
     let {
         IdCliente,
         IdVendedor,
         Latitud,
         Longitud,
         Pedido,
-        Comentario
+        Comentario,
+        FechaHoraCreacion
     } = req.body;
        
-    console.log(IdCliente);
+    console.log(FechaHoraCreacion);
 
     Checkin.create({
         IdCliente,
@@ -105,7 +105,7 @@ router.post('/createcheckin', function (req, res) {
     })
         .then(customer => res.json({
             status: 200,
-            data: "Exito al registrar"
+            data: "Exito al registrar"+FechaHoraCreacion
         }))
         .catch(err => res.json({
             status: 406,
