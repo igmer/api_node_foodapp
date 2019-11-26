@@ -4,22 +4,18 @@ const db = require('../config/database');
 const Usuario = require('../models/Usuario');
 
 
-router.get('/login', (req, res) =>
+router.get('/login', function(req, res) {
 
-    Usuario.findOne({
-        where: {
-            usuario: req.query.usuario,
-            password: req.query.password
-        }
+db.query(`SELECT * from usuarios where usuario = '${req.query.usuario}' AND password='${req.query.password}'`,{ type: db.QueryTypes.SELECT })
+.then(cliente => {
+    console.log(cliente);
+    res.json({
+        statusCode:200,
+        data:cliente
     })
-        .then(usuario => {
-            console.log(usuario);
-            res.json({
-                statusCode:200,
-                data:usuario
-            })
-        })
-        .catch(err => console.log(err))
+})
+.catch(err => console.log(err))
+}
 );
 
 module.exports = router;
