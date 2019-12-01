@@ -22,6 +22,7 @@ router.get('/clientebyid', (req, res) =>
         .catch(err => console.log(err))
 );
 router.post('/createcliente', function(req, res)  {
+    let eliminado =0;
     let {
         idCliente,Nombre,RazonSocial,Nrc,Nit,
         OtroDocumento,Giro,IdDepartamento,
@@ -40,7 +41,7 @@ router.post('/createcliente', function(req, res)  {
         CorreoElectronico,Fax, DiasCredito,IdVendedor,AplicaRetencion,
         LimiteCredito,IdPrecio, Contacto1, InfoContacto1,
         Contacto2, InfoContacto2, IdTipoComprobante, IdRuta,
-        CreadoPor, FechaHoraCreacion,latitud,longitud
+        CreadoPor, FechaHoraCreacion,latitud,longitud,eliminado
     })
         .then(customer => res.json({
             status: 200,
