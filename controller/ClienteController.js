@@ -29,7 +29,7 @@ router.post('/createcliente', function(req, res)  {
         CorreoElectronico,Fax, DiasCredito,IdVendedor,AplicaRetencion,
         LimiteCredito,IdPrecio, Contacto1, InfoContacto1,
         Contacto2, InfoContacto2, IdTipoComprobante, IdRuta,
-        CreadoPor, FechaHoraCreacion
+        CreadoPor, FechaHoraCreacion,latitud,longitud
     } = req.body;
     console.log(idCliente);
 
@@ -40,7 +40,7 @@ router.post('/createcliente', function(req, res)  {
         CorreoElectronico,Fax, DiasCredito,IdVendedor,AplicaRetencion,
         LimiteCredito,IdPrecio, Contacto1, InfoContacto1,
         Contacto2, InfoContacto2, IdTipoComprobante, IdRuta,
-        CreadoPor, FechaHoraCreacion
+        CreadoPor, FechaHoraCreacion,latitud,longitud
     })
         .then(customer => res.json({
             status: 200,
