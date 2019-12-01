@@ -103,7 +103,7 @@ router.get('/clientegetall', function(req, res) {
         let fecha = req.query.fecha;
         console.log(fecha)
         let idVendedor =req.query.idVendedor;
-        db.query(`fac_RecorridoRutaVendedor ${idVendedor}, '${fecha}'`,{ type: db.QueryTypes.SELECT })
+        db.query(`fac_RecorridoRutaVendedor ${idVendedor}, '${fecha}',0`,{ type: db.QueryTypes.SELECT })
     .then(productos => {
             console.log(productos);
             res.json({
